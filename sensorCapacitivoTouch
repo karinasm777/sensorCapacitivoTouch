@@ -1,0 +1,38 @@
+const int pinos_sensor[3] = {9, 10, 11};
+const int leds[3] = {4, 5, 6};
+
+void setup() 
+{
+  //Serial.begin(9600);
+  for (int i = 0; i < 4; i++) 
+  {
+    pinMode(pinos_sensor[i], INPUT_PULLUP);
+    pinMode(leds[i], OUTPUT);
+  }
+}
+ 
+void loop() 
+{
+  boolean sensorVal = false;
+ 
+  // Set sensorValue to 'true' if any pin reads HIGH
+  for (int i = 0; i < 4 && sensorVal == false; i++) 
+  {
+    sensorVal = digitalRead(pinos_sensor[i]);
+ 
+    //print out the value of the pushbutton
+    //Serial.print("Pin ");
+    //Serial.print(pinos_sensor[i]);
+    //Serial.print(": ");
+    //Serial.println(sensorVal);
+    if(sensorVal==HIGH){
+    digitalWrite(leds[i],HIGH);  
+    }
+    else{
+    digitalWrite(leds[i],LOW);    
+    }
+  }
+ 
+  // Set the LED to opposite of 'sensorValue' (on unless at least one pin reads HIGH)
+  delay(250);
+}
